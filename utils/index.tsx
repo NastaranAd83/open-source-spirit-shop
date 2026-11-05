@@ -1,6 +1,11 @@
 import type { MagicalType } from "@/types/github";
 import { MAGICAL_TYPES } from "@/utils/constants";
 
+// Replace the production URL with your real Vercel domain before deploying.
+export const ORIGIN_URL = process.env.DEVELOPMENT
+  ? "http://localhost:3000"
+  : "https://open-source-spirit-shop.vercel.app";
+
 export function getMagicalTypeIcon(magicalType: MagicalType) {
   return MAGICAL_TYPES.find((type) => type.id === magicalType)?.icon;
 }

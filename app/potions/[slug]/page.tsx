@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { PotionInfo } from "@/components/potions/potion-info";
@@ -22,6 +23,31 @@ export async function generateStaticParams() {
   return popularRepos.map((repo) => ({
     slug: repo.replace("/", "_"),
   }));
+}
+
+export async function generateMetadata({
+  params,
+}: PotionPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const { owner, repo } = parseSlug(slug);
+
+  if (!owner || !repo) {
+    notFound();
+  }
+
+  const potion = await fetchPotion(owner, repo);
+
+  if (!potion) {
+    notFound();
+  }
+
+  return {
+    title: potion.name,
+    description: potion.description ?? undefined,
+    alternates: {
+      canonical: `/potions/${slug}`,
+    },
+  };
 }
 
 export default async function PotionPage({ params }: PotionPageProps) {

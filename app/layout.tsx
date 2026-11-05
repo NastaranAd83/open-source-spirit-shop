@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+
 import { Navigation } from "@/components/navigation";
+import { ORIGIN_URL } from "@/utils";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,9 +16,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(ORIGIN_URL),
   title: "Open Source Spirit Shop",
   description:
     "Discover magical potions, brewed from the powers of popular open source tools.",
+  alternates: {
+    canonical: ORIGIN_URL,
+  },
 };
 
 export default function RootLayout({
