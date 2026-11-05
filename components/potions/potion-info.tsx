@@ -104,6 +104,7 @@ export function PotionInfo({ potion, title, subtitle }: PotionInfoProps) {
                       src={owner.avatar_url}
                       alt={owner.login}
                       fill
+                      sizes="40px"
                       className="object-cover"
                     />
                   </div>

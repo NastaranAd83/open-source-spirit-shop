@@ -26,15 +26,19 @@ export function PotionHeader({
       <div
         className={cn(
           "relative mr-4 overflow-hidden rounded-full",
-          isMedium ? "h-12 w-12" : "h-10 w-10"
+          isMedium ? "h-12 w-12" : "h-10 w-10",
         )}
       >
-        <Image src={avatar_url} alt={login} fill className="object-cover" />
+        <Image
+          src={avatar_url}
+          alt={login}
+          fill
+          sizes={isMedium ? "48px" : "40px"}
+          className="object-cover"
+        />
       </div>
       <div>
-        <h3
-          className={cn("font-semibold", isMedium ? "text-xl" : "text-base")}
-        >
+        <h3 className={cn("font-semibold", isMedium ? "text-xl" : "text-base")}>
           {name}
         </h3>
         <p className="text-sm text-muted-foreground">{login}</p>
