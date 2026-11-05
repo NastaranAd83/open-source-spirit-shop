@@ -42,7 +42,6 @@ export function PotionInfo({ potion, title, subtitle }: PotionInfoProps) {
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-        {/* ---------- Left column ---------- */}
         <div
           className={`h-full space-y-4 rounded-2xl border border-magic-purple/20 p-6 md:col-span-1 potion-${magicalType}`}
         >
@@ -75,7 +74,6 @@ export function PotionInfo({ potion, title, subtitle }: PotionInfoProps) {
           </PotionInfoCard>
         </div>
 
-        {/* ---------- Right column ---------- */}
         <div className="md:col-span-2">
           <div className="mb-6 rounded-2xl border border-magic-purple/20 p-6">
             <div className="flex items-center justify-between">

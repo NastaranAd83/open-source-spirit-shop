@@ -19,8 +19,6 @@ function getHeaders(): HeadersInit {
   return headers;
 }
 
-// Next.js signals "this page is dynamic" by throwing a special error.
-// A try/catch must not swallow it, otherwise `next build` fails.
 function isDynamicServerError(error: unknown) {
   return (
     error instanceof Error &&
@@ -38,7 +36,6 @@ export function transformRepoToPotion(repo: GitHubRepo, index: number): Potion {
   };
 }
 
-// SSG: cached at build time
 export async function fetchPotions(): Promise<Potion[]> {
   try {
     const response = await fetch(
@@ -46,7 +43,7 @@ export async function fetchPotions(): Promise<Potion[]> {
       {
         headers: getHeaders(),
         cache: "force-cache",
-      }
+      },
     );
 
     if (!response.ok) {
@@ -62,10 +59,9 @@ export async function fetchPotions(): Promise<Potion[]> {
   }
 }
 
-// ISR: cached, then revalidated every hour
 export async function fetchPotion(
   owner: string,
-  repo: string
+  repo: string,
 ): Promise<Potion | null> {
   try {
     console.log("Fetching potion:", owner, repo);
@@ -88,8 +84,6 @@ export async function fetchPotion(
   }
 }
 
-// SSR: never cached, a new random repo on every request.
-// `cache()` makes generateMetadata and the page share the same random pick.
 export const fetchRandomTrendingPotion = cache(
   async (): Promise<Potion | null> => {
     try {
@@ -98,7 +92,7 @@ export const fetchRandomTrendingPotion = cache(
         {
           headers: getHeaders(),
           cache: "no-store",
-        }
+        },
       );
 
       if (!response.ok) {
@@ -118,5 +112,5 @@ export const fetchRandomTrendingPotion = cache(
       console.error("Failed to fetch random potion:", error);
       return null;
     }
-  }
+  },
 );

@@ -9,8 +9,6 @@ type PotionPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-// Pre-build only the popular repos (ISR). Every other slug is rendered on
-// demand and then cached, because `dynamicParams` defaults to true.
 export async function generateStaticParams() {
   const popularRepos = [
     "facebook/react",

@@ -3,7 +3,6 @@
 :root {
   --radius: 0.625rem;
 
-  /* shadcn/ui tokens (dark magical theme) */
   --background: #0f0720;
   --foreground: #f3eefc;
   --card: #1a0f33;
@@ -88,7 +87,6 @@
 }
 
 @layer components {
-  /* element glow used by .potion-card and the details page */
   .potion-fire {
     --potion-glow: var(--element-fire);
   }
@@ -110,14 +108,22 @@
     );
     background-image: linear-gradient(
       to bottom right,
-      color-mix(in srgb, var(--potion-glow, var(--magic-purple)) 12%, transparent),
+      color-mix(
+        in srgb,
+        var(--potion-glow, var(--magic-purple)) 12%,
+        transparent
+      ),
       transparent
     );
   }
   .potion-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 0 24px
-      color-mix(in srgb, var(--potion-glow, var(--magic-purple)) 35%, transparent);
+      color-mix(
+        in srgb,
+        var(--potion-glow, var(--magic-purple)) 35%,
+        transparent
+      );
   }
 
   .filter-pill {

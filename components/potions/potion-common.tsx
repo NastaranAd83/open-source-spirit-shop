@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 import type { GitHubRepo } from "@/types/github";
 import { formatNumber } from "@/utils";
 
-// ---------- PotionHeader ----------
 interface PotionHeaderProps {
   name: string;
   owner: GitHubRepo["owner"];
@@ -47,7 +46,6 @@ export function PotionHeader({
   );
 }
 
-// ---------- PotionInfoCard ----------
 interface PotionInfoCardProps {
   title: string;
   children?: ReactNode;
@@ -64,7 +62,6 @@ export function PotionInfoCard({ title, children }: PotionInfoCardProps) {
   );
 }
 
-// ---------- PotionStats ----------
 interface PotionStatsProps {
   stars: number;
   forks: number;
