@@ -1,11 +1,14 @@
-import Image from "next/image";
 import Link from "next/link";
-import { PackageIcon, SparklesIcon, StarIcon } from "lucide-react";
+import { SparklesIcon } from "lucide-react";
 
+import {
+  PotionHeader,
+  PotionStats,
+} from "@/components/potions/potion-common";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import type { Potion } from "@/types/github";
-import { formatNumber, getMagicalTypeIcon } from "@/utils";
+import { getMagicalTypeIcon } from "@/utils";
 
 export function PotionCard({ potion }: { potion: Potion }) {
   const {
@@ -32,20 +35,7 @@ export function PotionCard({ potion }: { potion: Potion }) {
         </div>
 
         <CardHeader>
-          <div className="flex items-center">
-            <div className="relative mr-3 h-10 w-10 overflow-hidden rounded-full">
-              <Image
-                src={owner.avatar_url}
-                alt={owner.login}
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div>
-              <h3 className="font-semibold">{name}</h3>
-              <p className="text-sm text-muted-foreground">{owner.login}</p>
-            </div>
-          </div>
+          <PotionHeader name={name} owner={owner} />
         </CardHeader>
 
         <CardContent>
@@ -58,16 +48,11 @@ export function PotionCard({ potion }: { potion: Potion }) {
             <span>{potionEffect}</span>
           </div>
 
-          <div className="mb-4 flex items-center justify-between text-xs text-muted-foreground">
-            <div className="flex items-center gap-1">
-              <StarIcon className="h-4 w-4 text-yellow-400" />
-              <span>{formatNumber(stargazers_count)}</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <PackageIcon className="h-4 w-4 text-blue-400" />
-              <span>{formatNumber(forks_count)}</span>
-            </div>
-          </div>
+          <PotionStats
+            stars={stargazers_count}
+            forks={forks_count}
+            className="mb-4 items-center text-xs text-muted-foreground"
+          />
 
           <div className="flex flex-wrap gap-2">
             {topics.map((topic) => (

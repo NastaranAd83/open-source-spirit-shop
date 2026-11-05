@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 
+import { PotionInfo } from "@/components/potions/potion-info";
 import { fetchPotion } from "@/lib/github";
 import { parseSlug } from "@/utils";
 
@@ -37,6 +38,11 @@ export default async function PotionPage({ params }: PotionPageProps) {
     notFound();
   }
 
-  // temporary: just to see the data
-  return <pre className="overflow-auto text-sm">{JSON.stringify(potion, null, 2)}</pre>;
+  return (
+    <PotionInfo
+      potion={potion}
+      title="Potion Details"
+      subtitle="Discover the magical properties of this enchanted brew"
+    />
+  );
 }
