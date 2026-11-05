@@ -49,3 +49,30 @@ export async function fetchPotions(): Promise<Potion[]> {
     return [];
   }
 }
+
+// ISR: cached, then revalidated every hour
+export async function fetchPotion(
+  owner: string,
+  repo: string
+): Promise<Potion | null> {
+  try {
+    console.log("Fetching potion:", owner, repo);
+
+    const response = await fetch(`${GITHUB_API_URL}/repos/${owner}/${repo}`, {
+      headers: getHeaders(),
+      next: { revalidate: 3600 },
+    });
+
+    if (!response.ok) {
+      throw new Error(`GitHub API error: ${response.status}`);
+    }
+
+    const data: GitHubRepo = await response.json();
+
+    return transformRepoToPotion(data, 0);
+  } catch (error) {
+    console.error("Failed to fetch potion:", error);
+    return null;
+  }
+}
+

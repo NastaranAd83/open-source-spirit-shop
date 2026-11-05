@@ -14,3 +14,11 @@ export function formatNumber(num: number) {
   }
   return num.toString();
 }
+
+// "facebook_react" -> { owner: "facebook", repo: "react" }
+// Only the first "_" separates owner and repo (GitHub owners cannot contain "_").
+export function parseSlug(slug: string) {
+  const index = slug.indexOf("_");
+  if (index === -1) return { owner: "", repo: "" };
+  return { owner: slug.slice(0, index), repo: slug.slice(index + 1) };
+}
