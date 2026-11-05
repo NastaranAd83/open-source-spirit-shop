@@ -1,4 +1,9 @@
-export default function Home() {
+import { PotionGrid } from "@/components/potions/potion-grid";
+import { fetchPotions } from "@/lib/github";
+
+export default async function Home() {
+  const potions = await fetchPotions();
+
   return (
     <div className="container">
       <section className="mb-12 text-center">
@@ -10,6 +15,8 @@ export default function Home() {
           source tools.
         </p>
       </section>
+
+      <PotionGrid potions={potions} />
     </div>
   );
 }
