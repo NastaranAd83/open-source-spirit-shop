@@ -1,8 +1,19 @@
+import { PotionFilters } from "@/components/potions/potion-filters";
 import { PotionGrid } from "@/components/potions/potion-grid";
 import { fetchPotions } from "@/lib/github";
 
-export default async function Home() {
+type HomeProps = {
+  searchParams: Promise<{ type?: string }>;
+};
+
+export default async function Home({ searchParams }: HomeProps) {
+  const { type } = await searchParams;
+
   const potions = await fetchPotions();
+
+  const filteredPotions = type
+    ? potions.filter((potion) => potion.magicalType === type)
+    : potions;
 
   return (
     <div className="container">
@@ -16,7 +27,8 @@ export default async function Home() {
         </p>
       </section>
 
-      <PotionGrid potions={potions} />
+      <PotionFilters />
+      <PotionGrid potions={filteredPotions} />
     </div>
   );
 }
